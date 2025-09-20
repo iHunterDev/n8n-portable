@@ -1,0 +1,13 @@
+# common ignores
+lib/node_modules/
+temp/npm-cache/
+
+*.log
+logs
+
+
+# claude code
+CLAUDE.md
+
+# nodejs runtime
+bin/
