@@ -13,7 +13,9 @@ This is a portable version of n8n that runs without installation on Windows.
 - `scripts/start.bat` - Start n8n 
 - `scripts/stop.bat` - Stop n8n 
 - `scripts/backup.bat` - Create backup of your data 
-- `scripts/install-deps.bat` - Install additional n8n nodes 
+- `scripts/install-n8n.bat` - Install n8n to the portable environment
+- `scripts/download-nodejs.bat` - Download Node.js runtime
+- `scripts/load-env.bat` - Load environment variables from config 
  
 ## Configuration 
  
