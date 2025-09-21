@@ -1,6 +1,7 @@
 # common ignores
-lib/node_modules/
-temp/npm-cache/
+lib/
+temp/
+data/
 
 *.log
 logs
