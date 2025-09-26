@@ -43,18 +43,47 @@ echo "======================================="
 # 创建临时目录（若不存在则自动创建）
 mkdir -p temp
 
-# 确定系统架构
-if [ "$(uname -m)" = "arm64" ]; then
-    NODE_ARCH="arm64"
-else
-    NODE_ARCH="x64"
-fi
+# 确定操作系统和架构
+OS_NAME=$(uname -s)
+ARCH=$(uname -m)
 
-# https://nodejs.org/dist/v
+# 标准化架构名称
+case $ARCH in
+    x86_64)
+        NODE_ARCH="x64"
+        ;;
+    arm64|aarch64)
+        NODE_ARCH="arm64"
+        ;;
+    *)
+        echo "错误: 不支持的架构 $ARCH"
+        exit 1
+        ;;
+esac
+
+# 标准化操作系统名称
+case $OS_NAME in
+    Darwin)
+        NODE_OS="darwin"
+        ;;
+    Linux)
+        NODE_OS="linux"
+        ;;
+    *)
+        echo "错误: 不支持的操作系统 $OS_NAME"
+        exit 1
+        ;;
+esac
+
+echo "检测到系统: $NODE_OS ($NODE_ARCH)"
+
+# 镜像源设置
 NODEJS_RELEASE_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/v
+NODEJS_IDENTITY=node-v$NODE_VERSION-$NODE_OS-$NODE_ARCH
 
-DOWNLOAD_URL="$NODEJS_RELEASE_MIRROR$NODE_VERSION/node-v$NODE_VERSION-darwin-$NODE_ARCH.tar.gz"
-TAR_FILE="temp/node-v$NODE_VERSION-darwin-$NODE_ARCH.tar.gz"
+# 构建下载链接
+DOWNLOAD_URL="$NODEJS_RELEASE_MIRROR$NODE_VERSION/$NODEJS_IDENTITY.tar.gz"
+TAR_FILE="temp/$NODEJS_IDENTITY.tar.gz"
 
 echo "正在下载 Node.js v$NODE_VERSION..."
 echo "下载地址: $DOWNLOAD_URL"
@@ -88,7 +117,7 @@ mkdir -p bin
 mkdir -p lib
 
 # 将解压后的文件移动到 bin 目录（适配原脚本的目录结构）
-EXTRACTED_DIR="temp/node-v$NODE_VERSION-darwin-$NODE_ARCH"
+EXTRACTED_DIR="temp/$NODEJS_IDENTITY"
 if [ -d "$EXTRACTED_DIR" ]; then
 # 复制 lib 目录
     cp -r "$EXTRACTED_DIR/lib/"* "lib/"
@@ -100,14 +129,14 @@ if [ -d "$EXTRACTED_DIR" ]; then
     if [ -L "$EXTRACTED_DIR/bin/npm" ]; then
         NEW_NPM_PATH="$PWD/lib/node_modules/npm/bin/npm-cli.js"
         echo "重新创建 npm 链接: $NEW_NPM_PATH"
-        ln -s "$NEW_NPM_PATH" "bin/npm"
+        ln -sf "$NEW_NPM_PATH" "bin/npm"
     fi
 
     # 处理 npx 软链接
     if [ -L "$EXTRACTED_DIR/bin/npx" ]; then
         NEW_NPX_PATH="$PWD/lib/node_modules/npm/bin/npx-cli.js"
         echo "重新创建 npx 链接: $NEW_NPX_PATH"
-        ln -s "$NEW_NPX_PATH" "bin/npx"
+        ln -sf "$NEW_NPX_PATH" "bin/npx"
     fi
 
     # 处理 corepack 软链接
@@ -115,7 +144,7 @@ if [ -d "$EXTRACTED_DIR" ]; then
         # Corepack 通常位于 lib/node_modules/corepack/dist/corepack.js
         NEW_COREPACK_PATH="$PWD/lib/node_modules/corepack/dist/corepack.js"
         echo "重新创建 corepack 链接: $NEW_COREPACK_PATH"
-        ln -s "$NEW_COREPACK_PATH" "bin/corepack"
+        ln -sf "$NEW_COREPACK_PATH" "bin/corepack"
         
         # 验证 corepack 路径是否存在
         if [ ! -f "$NEW_COREPACK_PATH" ]; then
