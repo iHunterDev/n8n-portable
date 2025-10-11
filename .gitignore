@@ -12,3 +12,5 @@ CLAUDE.md
 
 # nodejs runtime
 bin/
+
+.DS_Store

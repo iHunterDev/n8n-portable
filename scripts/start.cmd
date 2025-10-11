@@ -2,6 +2,8 @@
 chcp 65001 >nul
 setlocal
 
+set "NPM_CONFIG_REGISTRY=https://registry.npmmirror.com"
+
 REM Change to project root directory
 cd /d "%~dp0.."
 
