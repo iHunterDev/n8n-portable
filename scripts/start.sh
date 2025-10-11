@@ -12,7 +12,7 @@ cd "$SCRIPT_DIR/.." || {
 # 检查Node.js是否存在，如果不存在则自动下载
 if [ ! -f "bin/node" ]; then
     echo "未检测到Node.js运行时，正在自动下载..."
-    if ! bash scripts/install-node.sh; then
+    if ! bash scripts/download-nodejs.sh; then
         echo "错误: Node.js下载失败"
         read -p "按任意键继续..."
         exit 1
