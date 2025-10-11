@@ -13,7 +13,7 @@ A portable, zero-installation version of [n8n](https://n8n.io/) that runs comple
 
 - **Zero Installation**: No system-wide dependencies required
 - **Portable**: Self-contained with embedded Node.js runtime
-- **Cross-Platform**: Windows (ready), Linux & macOS (planned)
+- **Cross-Platform**: Windows, Linux & macOS (all ready)
 - **Isolated Environment**: All data stored in project directory
 - **Easy Backup**: One-click data backup and restore
 - **Configurable**: Comprehensive environment configuration
@@ -27,8 +27,17 @@ A portable, zero-installation version of [n8n](https://n8n.io/) that runs comple
 3. Open your browser and go to http://localhost:5678
 4. Create your first workflow!
 
+### Linux & macOS
+1. Download and extract the portable edition
+2. Run `chmod +x scripts/*.sh` to make scripts executable
+3. Run `./scripts/start.sh` to start n8n
+4. Open your browser and go to http://localhost:5678
+5. Create your first workflow!
+
 ### Prerequisites
 - Windows 10/11 (x64 or ARM64)
+- Linux (Ubuntu, CentOS, Debian) (x64, ARM64)
+- macOS (Intel & Apple Silicon) (x64, ARM64)
 - 4GB RAM minimum (8GB recommended)
 - 2GB free disk space
 
@@ -57,13 +66,17 @@ n8n-portable/
 ### Method 1: Ready-to-Run (Recommended)
 1. Download the latest release
 2. Extract to your preferred location
-3. Run `scripts/start.cmd`
+3. Run the appropriate script for your platform:
+   - Windows: `scripts/start.cmd`
+   - Linux/macOS: `./scripts/start.sh`
 
 ### Method 2: Manual Setup
 1. Clone this repository
-2. Run `scripts/download-nodejs.cmd` to download Node.js runtime
-3. Run `scripts/install-n8n.cmd` to install n8n
-4. Run `scripts/start.cmd` to start
+2. Run the appropriate download script for your platform:
+   - Windows: `scripts/download-nodejs.cmd`
+   - Linux/macOS: `./scripts/download-nodejs.sh`
+3. Run `scripts/install-n8n.cmd` (Windows) or `./scripts/install-n8n.sh` (Linux/macOS) to install n8n
+4. Run `scripts/start.cmd` (Windows) or `./scripts/start.sh` (Linux/macOS) to start
 
 ## 📜 Available Scripts
 
@@ -71,6 +84,11 @@ n8n-portable/
 - **`start.cmd`** - Start n8n server
 - **`stop.cmd`** - Stop n8n server
 - **`download-nodejs.cmd`** - Download Node.js runtime
+
+### Linux & macOS Scripts
+- **`start.sh`** - Start n8n server
+- **`stop.sh`** - Stop n8n server
+- **`download-nodejs.sh`** - Download Node.js runtime
 
 ### Advanced Scripts
 All scripts use the modular JavaScript system in `scripts/js/`:
@@ -122,15 +140,17 @@ All user data is stored in the `data/` directory:
 - **Logs**: Application and error logs (`data/logs/`)
 
 ### Backup & Restore
-```cmd
-# Create backup
-scripts/backup.cmd
+*Backup and restore functionality is currently under development and not yet implemented.*
 
-# Restore from backup
-# 1. Stop n8n
-# 2. Replace data/ folder with backup contents
-# 3. Restart n8n
-```
+Manual backup process:
+1. **Stop n8n server** before creating backup
+2. **Copy the entire `data/` directory** to a safe location
+3. **To restore**:
+   - Stop n8n server
+   - Replace the `data/` directory with your backup
+   - Restart n8n server
+
+*Note: Automated backup scripts will be available in a future release.*
 
 ## 🔧 Development
 
@@ -177,7 +197,11 @@ N8N_PORT=5679
 
 **Node.js Runtime Missing**
 ```cmd
+# Windows
 scripts/download-nodejs.cmd
+
+# Linux/macOS
+./scripts/download-nodejs.sh
 ```
 
 **Database Corruption**
