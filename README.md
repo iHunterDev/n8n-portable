@@ -158,8 +158,8 @@ scripts/install-nodes.cmd @n8n/n8n-nodes-github
 | Platform | Status | Architecture | Notes |
 |----------|--------|--------------|-------|
 | Windows 10/11 | ✅ Ready | x64, ARM64 | Fully functional |
-| Linux | 🚧 Planned | x64, ARM64 | Ubuntu, CentOS, Debian |
-| macOS | 🚧 Planned | x64, Apple Silicon | Intel & M1/M2 support |
+| Linux | ✅ Ready | x64, ARM64 | Ubuntu, CentOS, Debian |
+| macOS | ✅ Ready | x64, Apple Silicon | Intel & M1/M2 support |
 
 ## 🚨 Troubleshooting
 
