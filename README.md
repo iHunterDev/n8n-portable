@@ -229,6 +229,23 @@ We welcome contributions! Please see our contributing guidelines:
 5. Test thoroughly
 6. Submit a pull request
 
+## 👥 Contributors
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/iHunterDev">
+        <img src="https://github.com/iHunterDev.png?size=120" width="64" height="64" alt="Contributor avatar" style="border-radius: 50%;" />
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/KaivnD">
+        <img src="https://github.com/KaivnD.png?size=120" width="64" height="64" alt="Contributor avatar" style="border-radius: 50%;" />
+      </a>
+    </td>
+  </tr>
+</table>
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
