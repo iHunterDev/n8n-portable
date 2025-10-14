@@ -84,11 +84,13 @@ n8n-portable/
 - **`start.cmd`** - Start n8n server
 - **`stop.cmd`** - Stop n8n server
 - **`download-nodejs.cmd`** - Download Node.js runtime
+- **`upgrade.cmd`** - Upgrade n8n to the latest (or a selected) version
 
 ### Linux & macOS Scripts
 - **`start.sh`** - Start n8n server
 - **`stop.sh`** - Stop n8n server
 - **`download-nodejs.sh`** - Download Node.js runtime
+- **`upgrade.sh`** - Upgrade n8n to the latest (or a selected) version
 
 ### Advanced Scripts
 All scripts use the modular JavaScript system in `scripts/js/`:
@@ -97,6 +99,14 @@ All scripts use the modular JavaScript system in `scripts/js/`:
 - **`start.js`** - Server startup with environment loading
 - **`stop.js`** - Graceful server shutdown
 - **`load-env.js`** - Environment variable management
+- **`upgrade-n8n.js`** - Interactive upgrader with GitHub release lookup
+
+## 🔄 Upgrade
+
+1. **Windows**: Run `scripts\upgrade.cmd`
+2. **Linux & macOS**: Run `./scripts/upgrade.sh`
+
+The upgrade script checks the currently installed version, pulls the latest stable releases from the GitHub API, and defaults to upgrading to the newest version. You can pick any listed release or enter a specific version manually if needed. If you encounter GitHub rate limits, set `GITHUB_TOKEN` (or `GH_TOKEN`) before running the script.
 
 ## ⚙️ Configuration
 
